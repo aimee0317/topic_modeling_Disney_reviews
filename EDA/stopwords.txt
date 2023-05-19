@@ -731,3 +731,6 @@ except
 excepting
 exes
 enough
+paris
+carlifornia
+hong kong
