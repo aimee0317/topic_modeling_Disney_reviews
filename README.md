@@ -3,7 +3,7 @@
 -   Author: Amelia Tang 
 
 ## About
-TBU Disney land is regarded as "The Happiest Place on Earth" by many according to U.S. News Travel (Anonymous 2021). This Natural Language Processing (NLP) project is to visualize and analyze the Disneyland Reviews data set I collected from [Kaggle](https://www.kaggle.com/datasets/arushchillar/disneyland-reviews). The data set contains 42,000 reviews of Three Disneyland locations: Paris, California and Hong Kong. In the project, I used sentiment analysis ....    
+TBU Disney land is regarded as "The Happiest Place on Earth" by many according to U.S. News Travel (Anonymous 2021). This Natural Language Processing (NLP) project is to visualize and analyze the Disneyland Reviews data set I collected from [Kaggle](https://www.kaggle.com/datasets/arushchillar/disneyland-reviews). The data set contains about 42,000 reviews of Three Disneyland locations: Paris, California and Hong Kong. In the project, I used sentiment analysis ....    
 
 ## Reports
 TBU
@@ -14,7 +14,11 @@ TBU
 ![Tableau Demo](EDA/disney-tableau-demo.gif)
 
 ### WordCloud 
-![](EDA/wordcloud.png)
+#### Unigram WordCloud
+![Unigram WordCloud](EDA/wordcloud.png)
+
+#### Bigram WordCloud
+![Bigram WordCloud](EDA/bi_gram_wordcloud.png)
 
 ### Clusters 
 
@@ -26,7 +30,7 @@ TBU
 At the project root
 `conda env create --file topic_modeling_disney.yaml`
 
-Run the following command from the environment where you installed
+<br>Run the following command from the environment where you installed
 JupyterLab.
 
 `conda install nb_conda_kernels`
