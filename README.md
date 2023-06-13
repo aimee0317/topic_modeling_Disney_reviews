@@ -10,8 +10,8 @@ TBU
 
 ## Visualizations 
 
-### Tableau Public 
-TBU
+### Tableau 
+![Tableau Demo](EDA/disney-tableau-demo.gif)
 
 ### WordCloud 
 ![](EDA/wordcloud.png)
