@@ -3,10 +3,12 @@
 -   Author: Amelia Tang 
 
 ## About
-TBU Disney land is regarded as "The Happiest Place on Earth" by many according to U.S. News Travel (Anonymous 2021). This Natural Language Processing (NLP) project is to visualize and analyze the Disneyland Reviews data set I collected from [Kaggle](https://www.kaggle.com/datasets/arushchillar/disneyland-reviews). The data set contains about 42,000 reviews of Three Disneyland locations: Paris, California and Hong Kong. In the project, I used sentiment analysis ....    
+Disney land is regarded as "The Happiest Place on Earth" by many according to U.S. News Travel (Anonymous 2021). This Natural Language Processing (NLP) project is to visualize and analyze the Disneyland Reviews data set I collected from [Kaggle](https://www.kaggle.com/datasets/arushchillar/disneyland-reviews). The dataset comprises approximately 42,000 reviews of three Disneyland locations: Paris, California, and Hong Kong. To facilitate data visualization, I created a Tableau story that provides an overview of ratings by branches and reviewer locations. For text data preprocessing, I performed basic text cleaning (e.g., removing digits), as well as stemming and lemmatization. In the project, I utilized two methods, TextBlob and NLTK VADER, for sentiment polarity analysis and compared the polarity scores assigned by both methods.
+
+<br> For topic modeling...
 
 ## Reports
-TBU
+EDA report (Pre-processing and sentiment analysis) can be found [here](https://github.com/aimee0317/topic_modeling_Disney_reviews/blob/main/EDA/Disney_EDA_Report.pdf)
 
 ## Visualizations 
 
