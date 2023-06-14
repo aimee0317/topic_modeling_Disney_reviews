@@ -22,7 +22,8 @@ EDA report (Pre-processing and sentiment analysis) can be found [here](https://g
 #### Bigram WordCloud
 ![Bigram WordCloud](EDA/bi_gram_wordcloud.png)
 
-### Clusters 
+### HDBSCAN Clusters 
+![HDBSCAN Clusters](src/HDBSCAN_cluster.png)
 
 
 ## Usage
