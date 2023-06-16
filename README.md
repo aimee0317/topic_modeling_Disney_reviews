@@ -5,10 +5,13 @@
 ## About
 Disney land is regarded as "The Happiest Place on Earth" by many according to U.S. News Travel (Anonymous 2021). This Natural Language Processing (NLP) project is to visualize and analyze the Disneyland Reviews data set I collected from [Kaggle](https://www.kaggle.com/datasets/arushchillar/disneyland-reviews). The dataset comprises approximately 42,000 reviews of three Disneyland locations: Paris, California, and Hong Kong. To facilitate data visualization, I created a Tableau story that provides an overview of ratings by branches and reviewer locations. For text data preprocessing, I performed basic text cleaning (e.g., removing digits), as well as stemming and lemmatization. In the project, I utilized two methods, TextBlob and NLTK VADER, for sentiment polarity analysis and compared the polarity scores assigned by both methods.
 
-<br> For topic modeling...
+<br>For topic modeling, I utilized Hierarchical Density-Based Spatial Clustering of Applications with Noise (HDBSCAN) and Latent Dirichlet Allocation (LDA) models to identify clusters/topics. However, the topics are hard to interpret as both models do not output semantic topics.  
+
+<br>Finally, I used ChatGPT prompt engineering...
 
 ## Reports
-EDA report (Pre-processing and sentiment analysis) can be found [here](https://github.com/aimee0317/topic_modeling_Disney_reviews/blob/main/EDA/Disney_EDA_Report.pdf)
+EDA report (Pre-processing and sentiment analysis) can be found [here](https://github.com/aimee0317/topic_modeling_Disney_reviews/blob/main/EDA/Disney_EDA_Report.pdf).
+<br>NLP modeling report (LDA and HDBSCAN) can be found [here](https://github.com/aimee0317/topic_modeling_Disney_reviews/blob/main/src/NLP_Model.pdf).
 
 ## Visualizations 
 
