@@ -1,0 +1,100 @@
+---
+title: "Topic Modeling Disney Reivew"
+author: "Amelia Tang"
+date: '2023/06/27 (updated: `r Sys.Date()`)'
+output:
+  html_document:
+    toc: yes
+  github_document:
+    toc: yes
+always_allow_html: yes
+bibliography: topic_modeling_reference.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(knitr)
+library(kableExtra)
+library(tidyverse)
+library(scales)
+```
+
+```{r read_test_score, include=FALSE, show_col_types = FALSE}
+test_score <- read_csv("../results/test_scores.csv") 
+```
+
+## Summary
+
+TBU
+
+## Introduction
+
+It is attractive, at times, for us to buy used cars. The price and insurance cost of a used car is generally lower than a new counterpart [@caldwell_2021]. In the past decade, many studies had explored non tree-based algorithms including linear regression, Supported Vector Machines (SVM), kNN and Naive Bayes to predict used car prices. The models produced comparable performances but failed to achieve satisfactory accuracy [@pudaruth2014predicting].
+
+In this project, I built regression models using two tree-based algorithms, `random forest` and `XGBoost` along with `linear regressions` with L1 and L2 regularization respectively. After comparing the performances, I constructed a final regression model using `XGboost` to predict used car price.
+
+## Methods
+
+### Data Collection and Processing
+
+The data set used in this project was a subset of the `100,000 UK Used Car Data set` on kaggle.com and available [here](https://www.kaggle.com/kukuroo3/used-car-price-dataset-competition-format). Each row of the data represents a used car and provides its ID, brand, model, year, transmission, mileage, fuel type, tax, miles per gallon and engine size.
+
+I dropped the column `carID` because it contained ID numbers assigned to used cars and was not relevant to our analysis.
+
+### Exploratory Data Analysis (EDA)
+
+To provide an overview of the data, I looked at the distribution of the target, the used car prices. According to Figure 1, the car prices were right-skewed with some potential outliers.
+
+```{r target, fig.align = 'center', echo=FALSE, fig.cap="Figure 1. Target Distribution", out.width = '40%'}
+knitr::include_graphics("../results/target_distribution_plot.svg")
+```
+
+According to Figure 2, some used car prices from relatively high-end manufacturers, such as Audi and Mercedes, did have considerably high prices but it was not against the common perception. Therefore, I decided not to further examine potential outliers.
+
+```{r brand, fig.align = 'center', echo=FALSE, fig.cap="Figure 2. Used Car Prices by Brands", out.width = '50%'}
+knitr::include_graphics("../results/price_by_brand.svg")
+```
+
+Other than brand, year built seemed to be a promising driver for used car prices. As shown in Figure 3, for each brand, when the years built became more recent, the prices tended to become higher.
+
+```{r brand_year, fig.align = 'center', echo=FALSE, fig.cap="Figure 3. Used Car Prices by Brands and Years", out.width = '90%'}
+knitr::include_graphics("../results/price_year_brand.svg")
+```
+
+### Model Selection
+
+Initially, I used four algorithms, linear regression with L2 regularization (`ridge`), linear regression with L1 regularization (`lasso`), `random forest` and `CatBoost`, to predict used car prices.
+
+The Python programming languages [@Python] and the following Python packages were used to perform the analysis: numpy [@2020NumPy-Array], pandas [@mckinney2010data], scikitlearn [@pedregosa2011scikit] and Catboost [@Catboost]. The code used to perform the analysis and create this report can be found [here](https://github.com/aimee0317/car_price_prediction).
+
+To conduct model selection, we looked at the performance of each model and observed that random forest performs the best:
+
+```{r model_comparison, message=FALSE, warning=FALSE, echo=FALSE, fig.cap="Table 1. Count of each funding size. Observed class imbalance", out.width = '90%'}
+model_comparison <- read_csv("../results/model_selection.csv") 
+  
+
+names(model_comparison)[1] <- ""
+model_comparison[1] <- c("fit time", "score time", "validation negative RMSE", "training negative RMSE", "validation R-Squared", "training R-squared")
+
+model_comparison |> 
+  kbl(caption = "Table 1. Performance comparison of all models. Tree-based models performed better than linear regressions.") |>
+  kable_styling()
+```
+
+Both tree-based models had longer fit time than the linear models did and all four models had relatively short score time. Although `random forest` achieved the highest training scores, its validation scores were worse than those of the `Catboost` model. The high training scores of `random forest` might be caused by overfitting.
+
+Therefore, we selected `XGboost` as the best performing model to conduct hyperparameter optimization and tuned the maximum depth of the tree-based model (`max_depth`) to further eliminate overfitting. We also tuned the learning rate (`learning_rate`) and the subsample ratio of the columns when constructing each tree ( `colsample_bytree).`
+
+According to Figure 4, `model` was the top price driver. As expected, `year` was a driver for used cars prices. It was among the top ten factors that affected used car prices in this model. Some other top ones were the size of the engine (`engineSize`) and mileage per gallon (`mpg`). Some models, especially the ones commonly perceived as premium, such as i8 and G Class, were among the most prominent factors that affected used car prices. They tended to push the prices higher.
+
+```{r shap, fig.align = 'center', echo=FALSE, fig.cap="Figure 4. Main Drivers for Used Car Prices", out.width = '50%'}
+knitr::include_graphics("../results/shap.svg")
+```
+
+## Results & Discussion
+
+In the end, the tuned `XGboost` model with a maximum depth of 8 achieved an R-squared of `r percent(test_score$R_squared, 0.1)` and root mean square error of `r round(test_score$Neg_RMSE, 2)`. The top three factors that influenced used car prices were size of the engine, year the car was built, and miles per gallon (mpg) according to the model.
+
+To further improve the model in the future, I would like to carefully examine the outliers in the used car prices and conduct hyperparameter optimization for `random forest` model for comparison with the tuned `XGBoost` model. Moreover, stacking and averaging ensemble techniques can also be explored.
+
+# References
